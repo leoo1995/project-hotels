@@ -5,9 +5,13 @@ import Date from "./components/Date";
 import SelectPrice from "./components/SelectPrice";
 import SelectCountry from "./components/SelectCountry";
 import SelectSize from "./components/SelectSize";
+import Reset from "./components/Reset";
 import "./sass/App.scss";
 import filterBySize from "./functions/filterBySize";
 import filterByDates from "./functions/filterByDates";
+import showAplicatedFilters from "./functions/showAplicatedFilters";
+import showAplicatedDates from "./functions/showAplicatedDates";
+
 const dates = [
   { value: "", id: 1 },
   { value: "", id: 2 }
@@ -31,37 +35,49 @@ const App = () => {
   const changeCountry = value => setCountry({ value: value });
   const changePrice = value => setPrice({ value: value });
   const changeSize = value => setSize({ value: value });
+  const resetFilters = () => {
+    setSize(selectSize);
+    setCountry(selectCountry);
+    setPrice(selectPrice);
+    setInputDates(dates);
+  };
+  const filteredHotels = hotels
+    .filter(hotel => (country.value ? hotel.country === country.value : true))
+    .filter(hotel => filterBySize(hotel, size))
+    .filter(hotel => (price.value ? hotel.price == price.value : true))
+    .filter(hotel => filterByDates(hotel, inputDates))
+    .map((hotel, index) => <Hotel key={index} {...hotel} />);
+
   return (
     <>
       <header>
+        <div className="time-interval">
+          <h1>Hoteles</h1>
+          Hay {filteredHotels.length + " "}
+          {showAplicatedFilters(size, price, country)}
+          {showAplicatedDates(inputDates)}
+        </div>
         <div className="filter">
           {dates.map(d => (
-            <Date
-              key={d.id}
-              id={d.id}
-              value={d.value}
-              changeDate={changeDate}
-            />
+            <div key={d.id} className="input-date">
+              <span>{d.id === 1 ? "Desde:" : "Hasta:"}</span>
+              <Date
+                key={d.id}
+                id={d.id}
+                value={d.value}
+                changeDate={changeDate}
+              />
+            </div>
           ))}
-          <SelectCountry
-            value={selectCountry.value}
-            changeCountry={changeCountry}
-          />
-          <SelectPrice value={selectPrice.value} changePrice={changePrice} />
-          <SelectSize value={selectSize.value} changeSize={changeSize} />
+
+          <SelectCountry value={country.value} changeCountry={changeCountry} />
+          <SelectPrice value={price.value} changePrice={changePrice} />
+          <SelectSize value={size.value} changeSize={changeSize} />
+          <Reset resetFilters={resetFilters} />
         </div>
       </header>
       <main className="container">
-        {hotels
-          .filter(hotel =>
-            country.value ? hotel.country === country.value : true
-          )
-          .filter(hotel => filterBySize(hotel, size))
-          .filter(hotel => (price.value ? hotel.price == price.value : true))
-          .filter(hotel => filterByDates(hotel, inputDates))
-          .map((hotel, index) => (
-            <Hotel key={index} {...hotel} />
-          ))}
+        {filteredHotels.length ? filteredHotels : "No hay coincidencias"}
       </main>
     </>
   );
