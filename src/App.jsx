@@ -32,9 +32,7 @@ const App = () => {
     );
     setInputDates(dateChanged);
   };
-  const changeCountry = value => setCountry({ value: value });
-  const changePrice = value => setPrice({ value: value });
-  const changeSize = value => setSize({ value: value });
+
   const resetFilters = () => {
     setSize(selectSize);
     setCountry(selectCountry);
@@ -64,15 +62,15 @@ const App = () => {
               <Date
                 key={d.id}
                 id={d.id}
-                value={d.value}
+                value={inputDates}
                 changeDate={changeDate}
               />
             </div>
           ))}
 
-          <SelectCountry value={country.value} changeCountry={changeCountry} />
-          <SelectPrice value={price.value} changePrice={changePrice} />
-          <SelectSize value={size.value} changeSize={changeSize} />
+          <SelectCountry value={[country, setCountry]} />
+          <SelectPrice value={[price, setPrice]} />
+          <SelectSize value={[size, setSize]} />
           <Reset resetFilters={resetFilters} />
         </div>
       </header>
