@@ -11,6 +11,7 @@ import filterBySize from "./functions/filterBySize";
 import filterByDates from "./functions/filterByDates";
 import showAplicatedFilters from "./functions/showAplicatedFilters";
 import showAplicatedDates from "./functions/showAplicatedDates";
+import isDateFromBefore from "./functions/isDateFromBefore";
 
 const dates = [
   { value: "", id: 1 },
@@ -55,6 +56,7 @@ const App = () => {
           {showAplicatedFilters(size, price, country)}
           {showAplicatedDates(inputDates)}
         </div>
+        {isDateFromBefore(inputDates)}
         <div className="filter">
           {dates.map(d => (
             <div key={d.id} className="input-date">
