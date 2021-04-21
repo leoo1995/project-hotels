@@ -1,8 +1,10 @@
 export default (hotel, inputDates) => {
   const [dateFrom, dateTo] = inputDates;
-  const timeUnixFrom = new Date(dateFrom.value).getTime();
-  const timeUnixTo = new Date(dateTo.value).getTime();
-
+  let timeUnixFrom = new Date(dateFrom.value).getTime() + 1;
+  const timeUnixTo = new Date(dateTo.value).getTime() + 82800000; //+23 hours
+  if (timeUnixFrom < new Date().getTime()) {
+    timeUnixFrom = new Date().getTime() + 1;
+  }
   if (timeUnixFrom > timeUnixTo) return false;
   if (timeUnixFrom <= timeUnixTo)
     return (

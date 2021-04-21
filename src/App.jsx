@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Hotel from "./components/Hotel";
 import hotels from "./data.js";
 import Date from "./components/Date";
@@ -27,6 +27,7 @@ const App = () => {
   const [country, setCountry] = useState(selectCountry);
   const [price, setPrice] = useState(selectPrice);
   const [size, setSize] = useState(selectSize);
+  useEffect(() => isDateFromBefore(inputDates), [inputDates]);
   const changeDate = (id, value) => {
     const dateChanged = inputDates.map(inputDate =>
       inputDate.id === id ? { id: id, value: value } : inputDate
@@ -56,7 +57,7 @@ const App = () => {
           {showAplicatedFilters(size, price, country)}
           {showAplicatedDates(inputDates)}
         </div>
-        {isDateFromBefore(inputDates)}
+
         <div className="filter">
           {dates.map(d => (
             <div key={d.id} className="input-date">
