@@ -9,7 +9,7 @@
 }
 .time-interval {
   background-color: #aaa;
-  padding: 1rem;
+  padding: 1rem 1rem 0.5rem;
   h1 {
     margin-bottom: 1rem;
   }
@@ -20,6 +20,7 @@
 .filter {
   background-color: #aaa;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-evenly;
   height: 40px;
   padding-block: 1rem;
@@ -38,6 +39,34 @@
     span {
       position: absolute;
       bottom: 100%;
+    }
+  }
+  @media (max-width: 1000px) {
+    justify-content: center;
+    padding-inline: 2rem;
+    height: 290px;
+    margin-top: -1rem;
+    .input-date {
+      flex-basis: 100%;
+      margin-top: 1.5rem;
+      height: 2.5rem;
+      input {
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+      }
+      &:last-of-type {
+        margin-bottom: 0.5rem;
+      }
+    }
+    select {
+      flex: 1 1 100%;
+      height: 2rem;
+    }
+    & button {
+      margin-top: 0.5rem;
+      width: 100%;
+      height: 2rem;
     }
   }
 }

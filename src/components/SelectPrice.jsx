@@ -6,7 +6,6 @@ const SelectPrice = props => {
   const [value, setValue] = props.value;
   const handleChange = event => {
     setValue({ value: event.target.value });
-    // props.changePrice(event.target.value);
   };
 
   return (

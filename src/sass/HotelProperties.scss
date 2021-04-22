@@ -23,7 +23,6 @@ $properties-color-icon: #fa4;
   margin: 1rem;
   & > * {
     margin-top: 5px;
-    // margin-right: 5px;
   }
   .room {
     @include hotel-properties();
@@ -43,6 +42,5 @@ $properties-color-icon: #fa4;
     width: 1.5rem;
     background: $properties-color-icon;
     padding: 5px;
-    // color: silver;
   }
 }

@@ -1,7 +1,5 @@
-import React, { useState } from "react";
-import data from "../data.js";
-import setOptionsProperty from "../functions/setOptionsProperty.js";
-import room from "../icons/bed.svg";
+import React from "react";
+
 const SelectSize = props => {
   const [value, setValue] = props.value;
   const handleChange = event => {
