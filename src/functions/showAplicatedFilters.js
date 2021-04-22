@@ -17,5 +17,5 @@ export default (size, price, country) => {
   return `hoteles${size.value ? " " + sizeHotel : " "}
   ${price.value && size.value ? " y " : ""}
   ${price.value ? " " + prices[price.value - 1] : " "}
-  ${country.value ? " en " + country.value : " "}`;
+  ${country.value ? " en " + country.value + " " : " "}`;
 };

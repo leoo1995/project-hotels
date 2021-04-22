@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import moment, { isMoment } from "moment";
+import React from "react";
+import moment from "moment";
 import "moment/locale/es";
 const Date = props => {
   const dates = props.value;

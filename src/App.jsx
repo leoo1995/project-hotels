@@ -12,15 +12,7 @@ import filterByDates from "./functions/filterByDates";
 import showAplicatedFilters from "./functions/showAplicatedFilters";
 import showAplicatedDates from "./functions/showAplicatedDates";
 import isDateFromBefore from "./functions/isDateFromBefore";
-
-const dates = [
-  { value: "", id: 1 },
-  { value: "", id: 2 }
-];
-
-const selectCountry = { value: "" };
-const selectPrice = { value: "" };
-const selectSize = { value: "" };
+import { selectCountry, selectPrice, dates, selectSize } from "./initialStates";
 
 const App = () => {
   const [inputDates, setInputDates] = useState(dates);
@@ -44,7 +36,7 @@ const App = () => {
   const filteredHotels = hotels
     .filter(hotel => (country.value ? hotel.country === country.value : true))
     .filter(hotel => filterBySize(hotel, size))
-    .filter(hotel => (price.value ? hotel.price == price.value : true))
+    .filter(hotel => (price.value ? hotel.price === +price.value : true))
     .filter(hotel => filterByDates(hotel, inputDates))
     .map((hotel, index) => <Hotel key={index} {...hotel} />);
 
